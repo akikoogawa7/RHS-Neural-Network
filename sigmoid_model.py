@@ -8,6 +8,7 @@ import pandas as pd
 import multiprocessing
 from sklearn import datasets, preprocessing
 from sklearn.metrics import f1_score
+from datasets import RHS_Dataset
 import matplotlib.pyplot as plt
 
 # %%
@@ -36,6 +37,7 @@ class RHS_Dataset(torch.utils.data.Dataset):
 
     def __len__(self):
         return len(self.y)
+        
 #%%
 class RHS_NeuralNetwork(torch.nn.Module):
     def __init__(self, n_features=8, n_labels=1):
