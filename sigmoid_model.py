@@ -1,6 +1,5 @@
 #%%
 import multiprocessing
-
 from scipy.sparse import data
 import torch
 import torchvision
@@ -16,7 +15,7 @@ class RHS_Dataset(torch.utils.data.Dataset):
     def __init__(self):
         super().__init__()
         # Read in raw csv
-        X = pd.read_csv('rhs_cleaned_dataset.csv')
+        X = pd.read_csv('dataset.csv')
         y = X['Max Time To Ultimate Height']
         # Normalise data
         scaler = preprocessing.StandardScaler()
