@@ -3,3 +3,4 @@ dataset.csv
 .ipynb_checkpoints
 __pycache__
 questions.txt
+.DS_Store
