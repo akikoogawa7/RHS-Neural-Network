@@ -1,5 +1,5 @@
 #%%
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 import torchvision
 import numpy as np
 import os
@@ -19,14 +19,22 @@ def create_file_list(my_dir, format='.jpg'):
 
 # Load in image folder as file list
 my_file_list = create_file_list('./plant_imgs')
+print(len(my_file_list))
 
 #%%
-# Convert each file into tensor
-for file in my_file_list:
-    print(file)
-    # img = Image.open(file)
-    # jpg_to_PIL = torchvision.ToPILImage()
-    # img_to_tensor = jpg_to_PIL.ToTensor()
-    # plt.imshow(jpg_to_PIL(img_to_tensor(img)))
 
-# %%
+# Convert each img into tensor
+def img_to_tensor():
+    for file in my_file_list:
+        existing_imgs = []
+        try:
+            img = Image.open(file)
+        except:
+            continue
+        existing_imgs.append(img)
+        jpg_to_PIL = torchvision.transforms.ToPILImage()
+        PIL_to_tensor = torchvision.transforms.ToTensor()
+
+    plt.imshow(jpg_to_PIL(PIL_to_tensor(img)))
+
+img_to_tensor()
