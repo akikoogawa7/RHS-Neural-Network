@@ -8,7 +8,6 @@ import pandas as pd
 import multiprocessing
 from sklearn import datasets, preprocessing
 from sklearn.metrics import f1_score
-from datasets import RHS_Dataset
 import matplotlib.pyplot as plt
 
 # %%
@@ -65,7 +64,7 @@ def train(model, dataloader, epochs=100):
     losses = []
     for epoch in range(epochs):
         # X, y = next(iter(dataloader))
-        for X, y in dataloader:
+        for X, y in range(dataloader):
             y_hat = model(X)
             loss = F.binary_cross_entropy(y_hat, y)
             loss.backward()
@@ -77,11 +76,14 @@ def train(model, dataloader, epochs=100):
     plt.show()
 
 # %%
+
 # Instantiate dataset
 dataset = RHS_Dataset()
+
 # Load in dataloader
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=multiprocessing.cpu_count()/2)
 model = RHS_NeuralNetwork()
+
 # %%
 train(model, dataloader)
 

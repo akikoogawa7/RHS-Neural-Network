@@ -1,11 +1,11 @@
 #%%
-from PIL import Image, UnidentifiedImageError
+from PIL import Image
 import torchvision
-import numpy as np
 import os
 import matplotlib.pyplot as plt
 
 # %%
+
 # Define file list function
 def create_file_list(my_dir, format='.jpg'):
     file_list = []
@@ -19,7 +19,6 @@ def create_file_list(my_dir, format='.jpg'):
 
 # Load in image folder as file list
 my_file_list = create_file_list('./plant_imgs')
-print(len(my_file_list))
 
 #%%
 

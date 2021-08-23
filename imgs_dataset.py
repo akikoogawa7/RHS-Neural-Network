@@ -1,14 +1,16 @@
 #%%
-from PIL import Image
 import torch
 import torchvision
 import matplotlib.pyplot as plt
+from PIL import Image
+from imgs_to_tensor import img_to_tensor, my_file_list
 
 #%%
 class RHS_Img_Dataset(torch.utils.data.Dataset):
-        def __init__ (self, root, transform):
+        def __init__ (self):
             super().__init__
-            # img to tensor class
+            my_file_list
+            img_to_tensor()
             # split data to train and val
             
         def __getitem__(self, index):
@@ -18,3 +20,5 @@ class RHS_Img_Dataset(torch.utils.data.Dataset):
         def __len__(self):
             return len(self.y)
 
+
+# %%

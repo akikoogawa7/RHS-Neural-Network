@@ -8,7 +8,7 @@ from torch.utils.tensorboard import SummaryWriter
 # Load in img dataset
 rhs_imgs = torch.utils.data.Dataset.RHS_Img_Dataset()
 
-class CNN(torch.nn.Module):
+class RHS_CNN(torch.nn.Module):
     def __init__(self, in_channels, n_classes):
         super().__init__
         self.conv_layers = torch.nn.Sequential(
@@ -22,20 +22,30 @@ class CNN(torch.nn.Module):
             torch.nn.ReLU(),
             torch.nn.Flatten(),
 
-            # torch.nn.Linear(how many input features, 128),
-            # torch.nn.Linear(128, how many k outputs),
+            # torch.nn.Linear(how many input features after conv?, 128),
+            # torch.nn.ReLU(),
+            # torch.nn.Linear(128, how many k outputs depends on what I classify),
             torch.nn.Softmax(dim=1)
         )
 
     def forward(self, x):
         self.conv_layers(x)
 
-def train(model):
+def train(model, epochs=100):
     writer = SummaryWriter()
     criterion = torch.nn.CrossEntropyLoss()
     optimiser = torch.optim.Adam(model.parameters(), lr=0.01)
     batch_idx = 64
-    for epoch in range(batch_idx)
+    losses = []
+    for epoch in range(epochs):
+        for features, labels in rhs_imgs:
+            optimiser.zero_grad()
+            output = model(features)
+            loss = criterion(output, labels)
+            loss.backward()
+            optimiser.step()
+            writer.add_scalar('loss/train', loss.item(), batch_idx)
+            batch_idx += 1
 
-
-# %%
+cnn = RHS_CNN()
+train(cnn)
