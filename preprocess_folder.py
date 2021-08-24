@@ -51,18 +51,24 @@ def full_label_filepath(my_dir):
 full_label_filepath(my_dir)
 
 #%%
-new_dir = 'plant_imgs'
+full_path = os.getcwd()
+new_dir = full_path + '/plant_imgs/'
+print(new_dir)
+
 def rename(new_dir):
-    for root, dirs, files in os.walk(new_dir, topdown=False):
+    for root, dirs, files in os.walk(new_dir):
         for full_label in full_label_list:
-            shutil.move(os.path.join(my_dir), full_label)
+            full_label = full_label[13::]
             folder = 0
             for folder in range(3297):
+                if not os.path.exists(new_dir):
+                    os.makedirs(os.path.dirname(root), exist_ok=True)
                 i = 0
                 for i in range(9):
-                    os.rename('/plant_imgs' + f'/{folder}/{i}.jpg', full_label)
+                    os.rename(root + f'{folder}/{i}.jpg', new_dir + full_label)
                 folder += 1
 
 # %%
 rename(new_dir)
+
 
