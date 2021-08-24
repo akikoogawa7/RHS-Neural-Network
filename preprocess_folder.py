@@ -4,7 +4,7 @@ import os
 import glob
 import pandas as pd
 import shutil
-from urllib.parse import urlparse
+from urllib.parse import DefragResultBytes, urlparse
 from posixpath import dirname
 
 my_dir = './plant_imgs'
@@ -33,6 +33,7 @@ def get_url_label():
         segments = dir.rpartition('/')
         string = segments[2]
         label_list.append(string)
+        print(string)
 
 get_url_label()
 
@@ -41,7 +42,7 @@ full_label_list = []
 def full_label_filepath(my_dir):
     for root, dirs, files in os.walk(my_dir, topdown=False):
         root = root.rpartition('/')
-        root = root[0]
+        root = root[0][1:13]
         for label in label_list:
             full_label_path = os.path.join(root, label)
             full_label_list.append(full_label_path)
@@ -50,25 +51,36 @@ def full_label_filepath(my_dir):
 #%%
 full_label_filepath(my_dir)
 
-#%%
-full_path = os.getcwd()
-print(full_path)
-new_dir = full_path + '/plant_imgs/'
-print(new_dir)
+img_path = os.getcwd() + '/plant_imgs'
+print(img_path)
 
-def rename(new_dir):
-    # for root, dirs, files in os.walk(new_dir):
-    for full_label in full_label_list:
-        full_label = full_label[13::]
-        i = 0
-        for folder in range(len(full_label_list)):
-            if not os.path.exists(new_dir):
-                print(new_dir)
-                os.makedirs(os.path.join(new_dir, full_label), exist_ok=True)
-            for i in range(9):
-                os.rename(new_dir + f'{folder}/{i}.jpg', new_dir + full_label)
-                folder += 1
+#%%
+src_folder_name_list = []
+def get_src():
+    for root, dirs, files in os.walk(img_path):
+        for dir in dirs:
+            i = 0
+            for i in range(3):
+                src_path = img_path + '/' + dir + f'/{i}.jpg'
                 i += 1
+                src_folder_name_list.append(src_path)
+get_src()
+
+src_folder_name_list
+ 
+#%%
+def rename():
+    for src in src_folder_name_list:
+        for label in label_list:
+            dst = label
+            dst_path = os.path.join(img_path + '/' + dst)
+            # for root, dirs, files in os.walk(img_path):
+            #     try:
+            #         os.rename(root + f'/{i}.jpg', dst_path + f'/{i}.jpg')
+            #     except FileNotFoundError:
+            #         pass
+
 
 # %%
-rename(new_dir)
+rename()
+
