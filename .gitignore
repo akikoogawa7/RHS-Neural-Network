@@ -1,8 +1,9 @@
-/plant_imgs
 dataset.csv
 .ipynb_checkpoints
 __pycache__
 questions.txt
 .DS_Store
+extracted_links.csv
 2. Convolutional Solutions.ipynb
 2. Datasets & DataLoaders.ipynb
+/plant_imgs
