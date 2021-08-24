@@ -55,14 +55,13 @@ new_dir = 'plant_imgs'
 def rename(new_dir):
     for root, dirs, files in os.walk(new_dir, topdown=False):
         for full_label in full_label_list:
-            for file in os.listdir(new_dir):
-                shutil.move(os.path.join(my_dir), full_label)
-                folder = 0
-                for folder in range(3297):
-                    i = 0
-                    for i in range(9):
-                        os.rename('/plant_imgs' + f'/{folder}/{i}.jpg', full_label)
-                    folder += 1
+            shutil.move(os.path.join(my_dir), full_label)
+            folder = 0
+            for folder in range(3297):
+                i = 0
+                for i in range(9):
+                    os.rename('/plant_imgs' + f'/{folder}/{i}.jpg', full_label)
+                folder += 1
 
 # %%
 rename(new_dir)
