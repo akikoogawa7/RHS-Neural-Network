@@ -3,7 +3,7 @@ import torch
 import torchvision
 import matplotlib.pyplot as plt
 from PIL import Image
-from imgs_to_tensor import img_to_tensor, my_file_list
+from imgs_to_tensor import my_file_list
 import pandas as pd
 
 #%%
@@ -14,8 +14,6 @@ class RHS_Img_Dataset(torch.utils.data.Dataset):
             self.targets = dataset[target]
             self.transform = transform
             my_file_list
-
-            img_to_tensor()
             # split data to train and val
             
         def __getitem__(self, index):
