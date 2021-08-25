@@ -1,4 +1,3 @@
-#%%
 import torch
 import torchvision
 import pandas as pd
@@ -10,31 +9,13 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 
-#%%
+# Get img properties
 my_file_list = create_file_list('./plant_imgs')
-
-index = 13716
-targets = my_file_list[0:13717]
-print(len(my_file_list))
-print(len(targets))
-
-#%%
-
-# Img properties
 im = Image.open(my_file_list[0])
 print(f'Image size: {im.size}')
 im.show
 
-seed = 42
-X_train, X_test, y_train, y_test  = train_test_split(my_file_list, targets, test_size=0.2, random_state=seed)
-X_train, X_val, y_train, y_val = train_test_split(my_file_list, targets, test_size=0.2, random_state=seed)
 
-#%%
-print(len(X_train))
-print(len(X_val))
-
-
-#%%
 class RHS_Img_Dataset(torch.utils.data.Dataset):
         def __init__ (self, transform=torchvision.transforms.ToTensor(), target='Full Sun'):
             super().__init__
@@ -59,7 +40,7 @@ class RHS_Img_Dataset(torch.utils.data.Dataset):
             
         def __getitem__(self, index):
             # Index through img list
-            img_path = X_train[index]
+            img_path = self.X_train[index]
             img = Image.open(img_path)
 
             # Apply tensor transformation to img
@@ -69,10 +50,3 @@ class RHS_Img_Dataset(torch.utils.data.Dataset):
 
         def __len__(self):
             return len(self.targets)
-
-
-# %%
-dataset = RHS_Img_Dataset()
-
-num_workers = 0
-dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=num_workers)
