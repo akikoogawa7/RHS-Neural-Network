@@ -1,2 +1,0 @@
-Why when I instantiate my class in sigmoid_model.py I get error using pd, even when I have imported pandas?
-Why in sigmoid_model.py TypeError: 'DataLoader' object cannot be interpreted as an integer?

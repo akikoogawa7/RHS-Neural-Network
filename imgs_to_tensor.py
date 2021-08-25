@@ -19,6 +19,4 @@ def create_file_list(my_dir, format='.jpg'):
                 file_list.append(full_name)
     return file_list
 
-# Load in image folder as file list
-my_file_list = create_file_list('./plant_imgs')
-
+# %%
