@@ -66,5 +66,3 @@ for index, row in df.iterrows():
         os.rename(src_path, dst_path)
     except OSError as E:
         print(E)
-
-
