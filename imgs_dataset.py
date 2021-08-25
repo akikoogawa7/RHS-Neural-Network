@@ -14,7 +14,6 @@ class RHS_Img_Dataset(torch.utils.data.Dataset):
             self.targets = dataset[target]
             self.transform = transform
             my_file_list
-            # split data to train and val
             
         def __getitem__(self, index):
             img_path = my_file_list[index]

@@ -1,4 +1,5 @@
 #%%
+from typing import ClassVar
 import torch
 import torchvision
 from imgs_dataset import RHS_Img_Dataset
@@ -6,19 +7,20 @@ from torch.utils.tensorboard import SummaryWriter
 
 #%%
 # Load in img dataset
-rhs_imgs = torch.utils.data.Dataset.RHS_Img_Dataset()
+rhs_img_dataset = RHS_Img_Dataset('Full Sun')
 
+#%%
 class RHS_CNN(torch.nn.Module):
     def __init__(self, in_channels, n_classes):
-        super().__init__
+        super(RHS_CNN, self).__init__
         self.conv_layers = torch.nn.Sequential(
-            torch.nn.Conv2D(in_channels, 32, kernal_size=3),
-            torch.nn.MaxPool2D(2),
-            torch.nn.BatchNorm2D(32), # do you batch norm once?
+            torch.nn.Conv2d(in_channels, 32, kernel_size=3),
+            torch.nn.MaxPool2d(2),
+            torch.nn.BatchNorm2d(32), # do you batch norm once?
             torch.nn.ReLU(),
             torch.nn.Dropout(),
-            torch.nn.Conv2D(32, 64, kernal_size=3),
-            torch.nn.MaxPool2D(2),
+            torch.nn.Conv2d(32, 64, kernel_size=3),
+            torch.nn.MaxPool2d(2),
             torch.nn.ReLU(),
             torch.nn.Flatten(),
 
@@ -38,7 +40,7 @@ def train(model, epochs=100):
     batch_idx = 64
     losses = []
     for epoch in range(epochs):
-        for features, labels in rhs_imgs:
+        for features, labels in rhs_imgs_dataset:
             optimiser.zero_grad()
             output = model(features)
             loss = criterion(output, labels)
@@ -46,6 +48,10 @@ def train(model, epochs=100):
             optimiser.step()
             writer.add_scalar('loss/train', loss.item(), batch_idx)
             batch_idx += 1
+#%%
+model = RHS_CNN(3, 1)
+# train(cnn)
 
-cnn = RHS_CNN()
-train(cnn)
+# %%
+
+# %%
