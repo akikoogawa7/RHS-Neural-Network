@@ -1,3 +1,4 @@
+#%%
 import multiprocessing
 from scipy.sparse import data
 import torch
@@ -9,7 +10,7 @@ from sklearn import datasets, preprocessing
 from sklearn.metrics import f1_score
 import matplotlib.pyplot as plt
 
-
+#%%
 class RHS_Dataset(torch.utils.data.Dataset):
     def __init__(self):
         super().__init__()
@@ -96,3 +97,5 @@ dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, n
 
 # Train model
 train(model, dataloader)
+
+# %%

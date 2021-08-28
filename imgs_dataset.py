@@ -1,3 +1,4 @@
+#%%
 import torch
 import torchvision
 import pandas as pd
@@ -7,46 +8,56 @@ from PIL import Image
 from imgs_to_tensor import create_file_list
 from pathlib import Path
 from sklearn.model_selection import train_test_split
+from torchvision import transforms
 
 
-# Get img properties
-my_file_list = create_file_list('./plant_imgs')
-im = Image.open(my_file_list[0])
-print(f'Image size: {im.size}')
-im.show
+#%%
+name_to_index = {
+    name: idx for idx, name in enumerate(os.listdir('plant_imgs'))
+}
 
+default_transform = transforms.Compose([
+    transforms.RandomRotation(180),
+    transforms.CenterCrop(4),
+    transforms.Resize([64, 64]),
+    transforms.ToTensor(),
+])
 
-class RHS_Img_Dataset(torch.utils.data.Dataset):
-        def __init__ (self, transform=torchvision.transforms.ToTensor(), target='Full Sun'):
+class RHSImgDataset(torch.utils.data.Dataset):
+        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=50):
             super().__init__
-            seed = 42
-            test_size = 0.2
-
-            # Load in categorical variables
-            dataset = pd.read_csv('dataset.csv')
 
             # Load in plant_imgs folder as list 
-            self.my_file_list = create_file_list('./plant_imgs')
-
-            # Define target variable
-            self.targets = dataset[target]
+            self.my_file_list = create_file_list('./plant_imgs', n_classes=n_classes)
 
             # Transform imgs to tensor
             self.transform = transform
 
-            # Split training and validation 10973/2744
-            self.X_train, self.X_test, self.y_train, self.y_test  = train_test_split(my_file_list, targets, test_size=test_size, random_state=seed)
-            self.X_train, self.X_val, self.y_train, self.y_val = train_test_split(my_file_list, targets, test_size=test_size, random_state=seed)
-            
         def __getitem__(self, index):
             # Index through img list
-            img_path = self.X_train[index]
+            # img_id = self.targets.iloc[index]
+            img_path = self.my_file_list[index]
+            species = img_path.split('/')
+            species = species[-2]
+            idx = name_to_index[species]
             img = Image.open(img_path)
 
             # Apply tensor transformation to img
             if self.transform:
                 img = self.transform(img)
-            return img, self.targets[index]
+            return img, idx
 
         def __len__(self):
-            return len(self.targets)
+            return len(self.my_file_list)
+
+if __name__ == '__main__':
+    dataset = RHSImgDataset()
+    dataset[0]
+    dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=4)
+    for data in dataloader:
+        X, y = data
+        print(f'The size of X: {X.shape}, the size of y: {y.shape}')
+        print(f'The dimension of X: {X.ndim}, the dimension of y: {y.ndim}')
+        break
+        
+
