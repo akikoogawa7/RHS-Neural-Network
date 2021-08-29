@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
 from sklearn.metrics import classification_report
 
-PATH = "state_dict_model.pt"
-
 class RHS_CNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3):
         super().__init__()
