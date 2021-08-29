@@ -22,9 +22,8 @@ The learning rate and number of epochs have been adjusted to attain the highest 
     transforms.ToTensor(),
 ])``
 - CNN class built using Conv2d, BatchNorm2d, ReLU and Dropout. Fully connected networks built using Linear, ReLU and Softmax. 
-`in_channels = 3, kernal_size = 5`
 <br>
 Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
 
 ### Outcome
-So far the highest accuracy score is 53%, that is with the learning rate - 0.001 run for 1000 epochs.
+Highest accuracy score so far is 53% with `lr = 0.001`, `epochs = 1000`, `in_channels = 3, kernal_size = 5`.
