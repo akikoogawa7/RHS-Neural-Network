@@ -2,10 +2,7 @@
 from typing import ClassVar
 import torch, torchmetrics
 from imgs_dataset import RHSImgDataset
-# import tensorflow as tf
-import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
-from sklearn.metrics import classification_report
 
 class RHS_CNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3):
