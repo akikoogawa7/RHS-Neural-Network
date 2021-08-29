@@ -1,7 +1,8 @@
 # RHS Plant Classification Model
 Building a multi-classification model using Convolutional Neural Networks (CNNs)
 
-![Abelia-chinensis](/imgs/0.jpg)
+<img src="/imgs/0.jpg" alt="plant" width="400"/>
+
 
 ### Description
 For this deep learning project, I decided to make use of the images which I had collected from an earlier web scraping project, from the [Royal Horticultural Society database](https://www.rhs.org.uk/Plants/Search-Results?form-mode=true&context=l%3Den%26q%3D%2523all%26sl%3DplantForm). 
