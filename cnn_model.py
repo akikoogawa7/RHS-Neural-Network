@@ -9,7 +9,6 @@ import time
 from metrics import f1_score
 from torch.utils.tensorboard import SummaryWriter
 
-
 #%%
 class RHS_CNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3):
@@ -33,7 +32,6 @@ class RHS_CNN(torch.nn.Module):
 
     def forward(self, x):
         return self.conv_layers(x)
-        
 
 def train(model, epochs=100):
     writer = SummaryWriter()
@@ -53,19 +51,16 @@ def train(model, epochs=100):
         score = f1_score(labels.detach(), output.detach())
         writer.add_scalar('score', score.item(), batch_idx)
 
-#%%
-
-# Load in img tensor dataset
-
+# Load n classes and img dataset
 n_classes = 50
-
 dataset = RHSImgDataset(n_classes=n_classes)
 
+# Load dataloader
 num_workers = 0
-
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=num_workers)
 
+# Instantiate model
 CNN = RHS_CNN(n_classes=n_classes)
 
+# Train model
 train(CNN)
-
