@@ -31,7 +31,7 @@ def train(model, epochs=1000):
     writer = SummaryWriter()
     metric = torchmetrics.Accuracy()
     criterion = torch.nn.CrossEntropyLoss()
-    optimiser = torch.optim.Adam(model.parameters(), lr=0.0001)
+    optimiser = torch.optim.SGD(model.parameters(), lr=0.001)
     batch_idx = 64
     for epoch in range(epochs):
         for features, labels in dataloader:
@@ -55,7 +55,6 @@ def report(scores):
         f.write(f'The ACCURACY SCORE for this CNN model is: {scores}')
     
 def save_model(epoch, model, optimiser, loss):
-    PATH = "state_dict_model.pt"
     torch.save(
         {
             'epoch': epoch,
@@ -65,6 +64,8 @@ def save_model(epoch, model, optimiser, loss):
         },
         PATH,
     )
+
+PATH = "state_dict_model.pt"
 
 # Load n classes and img dataset
 n_classes = 50
@@ -79,3 +80,10 @@ CNN = RHS_CNN(n_classes=n_classes)
 
 # Train model
 train(CNN)
+
+# %%
+# Load model
+def load_model():
+    CNN.load_state_dict(torch.load(PATH))
+    CNN.eval()
+# %%
