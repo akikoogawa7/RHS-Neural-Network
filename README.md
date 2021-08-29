@@ -11,15 +11,18 @@ The number of images have been batched to a length of 64 per batch and are shuff
 The learning rate and number of epochs have been adjusted to attain the highest accuracy score. Different gradient descent optimisers such as Adam (Adaptive Moment Estimation) and SGD (Stochastic Gradient Descent) have been compared to achieve the best model.
 
 ### Process
-1. Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
-2. Converted images to tensor: Images were then transformed into tensors using PIL.
-3. Created dataset class: Transformed the dataset to fit the requirements of the model.
-`default_transform = transforms.Compose([
+- Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
+- Converted images to tensor: Images were then transformed into tensors using PIL.
+- Created dataset class: Transformed the dataset to fit the requirements of the model.<br>
+``default_transform = transforms.Compose([
     transforms.RandomRotation(180),
     transforms.CenterCrop(4),
     transforms.Resize([64, 64]),
     transforms.ToTensor(),
-])`
+])``
+- CNN class built using Conv2d, BatchNorm2d, ReLU and Dropout. Fully connected networks built using Linear, ReLU and Softmax. 
+`in_channels = 3, kernal_size = 5`
+<br>
 Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
 
 ### Outcome
