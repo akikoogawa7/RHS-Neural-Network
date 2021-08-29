@@ -1,15 +1,16 @@
 #%%
 from typing import ClassVar
-import torch
+import torch, torchmetrics
 import torchvision
 from imgs_dataset import RHSImgDataset
 # import tensorflow as tf
 import matplotlib.pyplot as plt
 import time
-from metrics import f1_score
 from torch.utils.tensorboard import SummaryWriter
+from sklearn.metrics import classification_report
 
-#%%
+PATH = "state_dict_model.pt"
+
 class RHS_CNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3):
         super().__init__()
@@ -33,12 +34,12 @@ class RHS_CNN(torch.nn.Module):
     def forward(self, x):
         return self.conv_layers(x)
 
-def train(model, epochs=100):
+def train(model, epochs=1000):
     writer = SummaryWriter()
+    metric = torchmetrics.Accuracy()
     criterion = torch.nn.CrossEntropyLoss()
-    optimiser = torch.optim.Adam(model.parameters(), lr=0.001)
+    optimiser = torch.optim.Adam(model.parameters(), lr=0.0001)
     batch_idx = 64
-    losses = []
     for epoch in range(epochs):
         for features, labels in dataloader:
             optimiser.zero_grad()
@@ -46,10 +47,31 @@ def train(model, epochs=100):
             loss = criterion(output, labels)
             loss.backward()
             optimiser.step()
+            acc = metric(output, labels)
+            # print(f'Accuracy on batch: {acc}')
             writer.add_scalar('loss/train', loss.item(), batch_idx)
             batch_idx += 1
-        score = f1_score(labels.detach(), output.detach())
-        writer.add_scalar('score', score.item(), batch_idx)
+        acc = metric(output, labels)
+    report(acc)
+    print(f'Accuracy: {acc}')
+    # writer.add_scalar('accuracy', acc.item(), batch_idx)
+    saved = save_model(epoch, model, optimiser, loss)
+
+def report(scores):
+    with open('report.txt', 'w') as f:
+        f.write(f'The ACCURACY SCORE for this CNN model is: {scores}')
+    
+def save_model(epoch, model, optimiser, loss):
+    PATH = "state_dict_model.pt"
+    torch.save(
+        {
+            'epoch': epoch,
+            'model_state_dict': model.state_dict(),
+            'optimiser': optimiser.state_dict(),
+            'loss': loss,
+        },
+        PATH,
+    )
 
 # Load n classes and img dataset
 n_classes = 50
