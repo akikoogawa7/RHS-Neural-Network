@@ -1,1 +1,1 @@
-The score for this CNN model is: 0.23529411852359772
+The score for this CNN model is: 0.29411765933036804
