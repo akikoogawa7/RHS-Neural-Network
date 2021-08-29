@@ -1,4 +1,3 @@
-#%%
 import torch
 import torchvision
 import pandas as pd
@@ -7,11 +6,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from imgs_to_tensor import create_file_list
 from pathlib import Path
-from sklearn.model_selection import train_test_split
 from torchvision import transforms
 
-
-#%%
 name_to_index = {
     name: idx for idx, name in enumerate(os.listdir('plant_imgs'))
 }
@@ -35,7 +31,6 @@ class RHSImgDataset(torch.utils.data.Dataset):
 
         def __getitem__(self, index):
             # Index through img list
-            # img_id = self.targets.iloc[index]
             img_path = self.my_file_list[index]
             species = img_path.split('/')
             species = species[-2]
@@ -59,5 +54,3 @@ if __name__ == '__main__':
         print(f'The size of X: {X.shape}, the size of y: {y.shape}')
         print(f'The dimension of X: {X.ndim}, the dimension of y: {y.ndim}')
         break
-        
-
