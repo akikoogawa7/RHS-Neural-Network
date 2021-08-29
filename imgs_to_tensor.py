@@ -1,8 +1,5 @@
-#%%
 from PIL import Image
-import torchvision
 import os
-import matplotlib.pyplot as plt
 
 # Define file list function
 def create_file_list(my_dir, format='.jpg', n_classes=50):
@@ -24,5 +21,4 @@ def create_file_list(my_dir, format='.jpg', n_classes=50):
 
 if __name__ == '__main__':
     file_list = create_file_list('plant_imgs', n_classes=50)
-    print(len(file_list))
-    
+    print(len(file_list))   
