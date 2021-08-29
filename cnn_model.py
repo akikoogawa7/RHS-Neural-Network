@@ -1,5 +1,6 @@
-from typing import ClassVar
 import torch, torchmetrics
+import time
+from typing import ClassVar
 from imgs_dataset import RHSImgDataset
 from torch.utils.tensorboard import SummaryWriter
 
@@ -51,7 +52,7 @@ def train(model, epochs=1000):
 
 def report(scores):
     with open('report.txt', 'w') as f:
-        f.write(f'The ACCURACY SCORE for this CNN model is: {scores}')
+        f.write(f'ACCURACY SCORE: {scores} | TIME: {time.asctime( time.localtime(time.time()) )}')
     
 def save_model(epoch, model, optimiser, loss):
     torch.save(
@@ -84,3 +85,4 @@ train(CNN)
 def load_model():
     CNN.load_state_dict(torch.load(PATH))
     CNN.eval()
+    
