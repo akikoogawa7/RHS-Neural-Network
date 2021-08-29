@@ -1,6 +1,4 @@
-#%%
 import torch
-import torch.nn.functional as F
 
 def f1_score(y_true:torch.Tensor, y_pred:torch.Tensor, is_training=False) -> torch.Tensor:
     assert y_true.ndim == 1
@@ -46,6 +44,3 @@ class F1_Loss(torch.nn.Module):
         f1 = 2* (precision*recall) / (precision + recall + self.epsilon)
         f1 = f1.clamp(min=self.epsilon, max=1-self.epsilon)
         return 1 - f1.mean()
-
-f1_loss = F1_Loss().cuda()
-# %%
