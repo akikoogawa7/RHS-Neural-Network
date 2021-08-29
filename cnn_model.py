@@ -1,4 +1,3 @@
-#%%
 from typing import ClassVar
 import torch, torchmetrics
 from imgs_dataset import RHSImgDataset
@@ -31,7 +30,7 @@ def train(model, epochs=1000):
     writer = SummaryWriter()
     metric = torchmetrics.Accuracy()
     criterion = torch.nn.CrossEntropyLoss()
-    optimiser = torch.optim.SGD(model.parameters(), lr=0.001)
+    optimiser = torch.optim.Adam(model.parameters(), lr=0.001)
     batch_idx = 64
     for epoch in range(epochs):
         for features, labels in dataloader:
@@ -48,7 +47,7 @@ def train(model, epochs=1000):
     report(acc)
     print(f'Accuracy: {acc}')
     # writer.add_scalar('accuracy', acc.item(), batch_idx)
-    saved = save_model(epoch, model, optimiser, loss)
+    save_model(epoch, model, optimiser, loss)
 
 def report(scores):
     with open('report.txt', 'w') as f:
@@ -81,9 +80,7 @@ CNN = RHS_CNN(n_classes=n_classes)
 # Train model
 train(CNN)
 
-# %%
 # Load model
 def load_model():
     CNN.load_state_dict(torch.load(PATH))
     CNN.eval()
-# %%
