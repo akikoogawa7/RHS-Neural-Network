@@ -1,1 +1,1 @@
-The ACCURACY SCORE for this CNN model is: 0.0
+The ACCURACY SCORE for this CNN model is: 0.4117647111415863
