@@ -1,11 +1,9 @@
 #%%
 from typing import ClassVar
 import torch, torchmetrics
-import torchvision
 from imgs_dataset import RHSImgDataset
 # import tensorflow as tf
 import matplotlib.pyplot as plt
-import time
 from torch.utils.tensorboard import SummaryWriter
 from sklearn.metrics import classification_report
 
