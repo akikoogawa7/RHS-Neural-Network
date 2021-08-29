@@ -26,4 +26,4 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
 
 ### Outcome
-Highest accuracy score so far is 53% with `lr = 0.001`, `epochs = 1000`, `in_channels = 3, kernal_size = 5`.
+Highest accuracy score so far is 53% with `lr = 0.001`, `epochs = 1000`, `kernal_size = 5`.
