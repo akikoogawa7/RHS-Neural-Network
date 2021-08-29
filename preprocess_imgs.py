@@ -1,4 +1,3 @@
-#%%
 from io import StringIO
 import os
 import glob
@@ -9,25 +8,19 @@ from posixpath import dirname
 
 my_dir = './plant_imgs'
 
-# Read in csv
+# Read in CSV with labels
 df = pd.read_csv('extracted_links.csv', header=None)
 df = df.iloc[0:3972]
-#%%
-display(df.head(15))
-#%%
-df.iloc[41].head(1).item()
-# %%
 
-# Preprocess to apply named labels to imgs
+# Preprocess to apply labels to img path
 link_list = []
 def create_url_list():
     for link in df[0]:
         link_list.append(link)
-    print(len(link_list))
+    print(f'Number of url labels: {len(link_list)}')
 
 create_url_list()
 
-#%%
 label_list = []
 def get_url_label(url):
     string = url
@@ -38,14 +31,11 @@ def get_url_label(url):
     label_list.append(string)
     return(string)
 
-#%%
-
-# Create column with labels
+# Create new column with labels
 df['Labels'] = df.apply(lambda row: get_url_label(row[0]), axis=1)
+df
 
-#%%
-
-# Rename files with labels
+# Rename indexed folders with labels
 img_path = os.getcwd() + '/plant_imgs'
 print(img_path)
 
