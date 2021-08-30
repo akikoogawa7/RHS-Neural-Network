@@ -7,6 +7,7 @@ from PIL import Image
 from imgs_to_tensor import create_file_list
 from pathlib import Path
 from torchvision import transforms
+from sklearn.model_selection import train_test_split
 
 name_to_index = {
     name: idx for idx, name in enumerate(os.listdir('plant_imgs'))
@@ -41,6 +42,7 @@ class RHSImgDataset(torch.utils.data.Dataset):
             if self.transform:
                 img = self.transform(img)
             return img, idx
+            
 
         def __len__(self):
             return len(self.my_file_list)
