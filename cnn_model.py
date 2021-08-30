@@ -23,7 +23,7 @@ class RHS_CNN(torch.nn.Module):
             torch.nn.Flatten(),
 
             torch.nn.Linear(64, 64),
-            torch.nn.ReLU(),
+            torch.nn.LeakyReLU(negative_slope=negative_slope, inplace=True),
             torch.nn.Linear(64, n_classes),
             torch.nn.Softmax(dim=1)
         )
@@ -56,10 +56,9 @@ def train(model, epochs=1000, lr = 0.001):
     # writer.add_scalar('accuracy', acc.item(), batch_idx)
     save_model(epoch, model, optimiser, loss)
 
-
 def report(train_acc, val_acc, lr, epoch):
     with open('report.txt', 'a') as f:
-        f.write(f'ACCURACY SCORE:\nTrain accuracy: {train_acc}\nValidation accuracy:{val_acc}\nTIME:\n{time.asctime( time.localtime(time.time()) )}\nHYPERPARAMETERS:\nlr: {lr}\nepochs: {epoch}')
+        f.write(f'ACCURACY SCORE:\nTrain accuracy: {train_acc}\nValidation accuracy:{val_acc}\nTIME:\n{time.asctime( time.localtime(time.time()) )}\nHYPERPARAMETERS:\nlr: {lr}\nepochs: {epoch}\n')
     
 def save_model(epoch, model, optimiser, loss):
     PATH = "state_dict_model.pt"

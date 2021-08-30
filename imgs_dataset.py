@@ -14,8 +14,8 @@ name_to_index = {
 }
 
 default_transform = transforms.Compose([
-    transforms.RandomRotation(180),
-    transforms.CenterCrop(4),
+    transforms.RandomRotation(90),
+    transforms.CenterCrop(200),
     transforms.Resize([64, 64]),
     transforms.ToTensor(),
 ])

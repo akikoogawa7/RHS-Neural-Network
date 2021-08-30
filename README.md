@@ -12,18 +12,21 @@ The number of images have been batched to a length of 64 per batch and are shuff
 The learning rate and number of epochs have been adjusted to attain the highest accuracy score. Gradient descent optimiser Adam (Adaptive Moment Estimation) has been used throughout training.
 
 ### Process
+#### Data Preprocessing
 - Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
 - Converted images to tensor: Images were then transformed into tensors using PIL.
 - Created dataset class: Transformed the dataset to fit the requirements of the model.<br>
-``default_transform = transforms.Compose([
+``transforms.Compose([
     transforms.RandomRotation(180),
     transforms.CenterCrop(4),
     transforms.Resize([64, 64]),
     transforms.ToTensor(),
 ])``
-- CNN class built using Conv2d, BatchNorm2d, ReLU and Dropout. Fully connected networks built using Linear, ReLU and Softmax. 
+#### Feature Extraction
+- CNN class built using Conv2d, BatchNorm2d, LeakyReLU and Dropout. Fully connected networks built using Linear, LeakyReLU and Softmax. 
 <br>
-Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
+#### Regression Analysis
+- Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
 
 ### Outcome
 Highest accuracy score so far is 53% with `lr = 0.001`, `epochs = 1000`, `kernal_size = 5`.
