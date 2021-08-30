@@ -15,14 +15,14 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 - Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
 - Converted images to tensor: Images were then transformed into tensors using PIL.
 - Created dataset class: Augmented images
-<br>
-``transforms.Compose([
+<code>transforms.Compose([
     transforms.RandomRotation(180),
     transforms.CenterCrop(4),
     transforms.Resize([64, 64]),
     transforms.ToTensor(),
-])``
-<img src="/imgs/before_transformation.pdf" alt="plant" width="300"><img src="/imgs/after_transformation.pdf" alt="plant" width="300">
+])</code>
+
+<img src="/imgs/before_transformation.jpg" alt="plant" width="300"><img src="/imgs/after_transformation.jpg" alt="plant" width="300">
 
 - Split data into training/validation set with ratio of 80/20.
 
