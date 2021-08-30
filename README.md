@@ -22,7 +22,7 @@ The learning rate and number of epochs have been adjusted to attain the highest 
     transforms.ToTensor(),
 ])</code>
 
-<img src="/imgs/before_transformation.jpg" alt="before transform" width="300"><img src="/imgs/after_transformation.jpg" alt="after transform" width="300">
+<img src="/imgs/before_transform.jpg" alt="before transform" width="300"><img src="/imgs/after_transform.jpg" alt="after transform" width="300">
 
 - Split data into training/validation set with ratio of 80/20.
 
