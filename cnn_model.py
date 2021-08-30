@@ -7,7 +7,7 @@ from imgs_dataset import RHSImgDataset
 from torch.utils.data.sampler import SubsetRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 
-class RHS_CNN(torch.nn.Module):
+class RHSCNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3, negative_slope=0.01):
         super().__init__()
         self.conv_layers = torch.nn.Sequential(
@@ -15,11 +15,11 @@ class RHS_CNN(torch.nn.Module):
             torch.nn.MaxPool2d(5),
             torch.nn.BatchNorm2d(32),
             torch.nn.LeakyReLU(negative_slope=negative_slope, inplace=True),
-            torch.nn.Dropout(),
+            torch.nn.Dropout(p=0.8),
             torch.nn.Conv2d(32, 64, kernel_size=5),
             torch.nn.MaxPool2d(5),
             torch.nn.LeakyReLU(negative_slope=negative_slope, inplace=True),
-            torch.nn.Dropout(),
+            torch.nn.Dropout(p=0.8),
             torch.nn.Flatten(),
 
             torch.nn.Linear(64, 64),
@@ -58,7 +58,7 @@ def train(model, epochs=1000, lr = 0.001):
 
 def report(train_acc, val_acc, lr, epoch):
     with open('report.txt', 'a') as f:
-        f.write(f'ACCURACY SCORE:\nTrain accuracy: {train_acc}\nValidation accuracy:{val_acc}\nTIME:\n{time.asctime( time.localtime(time.time()) )}\nHYPERPARAMETERS:\nlr: {lr}\nepochs: {epoch}\n')
+        f.write(f'ACCURACY SCORE\nTrain accuracy: {train_acc}\nValidation accuracy: {val_acc}\n\nHYPERPARAMETERS\nlr: {lr}\nepochs: {epoch}\n\nTIME\n{time.asctime( time.localtime(time.time()) )}\n\n')
     
 def save_model(epoch, model, optimiser, loss):
     PATH = "state_dict_model.pt"
@@ -100,7 +100,7 @@ validation_loader = torch.utils.data.DataLoader(dataset, batch_size=64, num_work
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=0)
 
 # Instantiate model
-CNN = RHS_CNN(n_classes=n_classes)
+CNN = RHSCNN(n_classes=n_classes)
 
 # Train model
 train(CNN)

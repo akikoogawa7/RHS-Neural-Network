@@ -1,8 +1,21 @@
-ACCURACY SCORE:
+ACCURACY SCORE
 Train accuracy: 0.5
-Validation accuracy:0.2926829159259796
-TIME:
+Validation accuracy: 0.2926829159259796
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
 Mon Aug 30 13:53:01 2021
+
+ACCURACY SCORE
+Train accuracy: 0.625
+Validation accuracy: 0.2195121943950653
+
+TIME:
+Mon Aug 30 18:20:34 2021
+
 HYPERPARAMETERS:
 lr: 0.001
 epochs: 999
