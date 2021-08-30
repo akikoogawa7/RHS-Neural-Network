@@ -21,7 +21,7 @@ default_transform = transforms.Compose([
 ])
 
 class RHSImgDataset(torch.utils.data.Dataset):
-        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=50):
+        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=80):
             super().__init__
 
             # Load in plant_imgs folder as list 

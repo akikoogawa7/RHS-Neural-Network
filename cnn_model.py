@@ -73,7 +73,7 @@ def save_model(epoch, model, optimiser, loss):
     )
 
 # Load n classes and img dataset
-n_classes = 50
+n_classes = 80
 dataset = RHSImgDataset(n_classes=n_classes)
 
 # Creating data indices for training and validation splits
@@ -104,7 +104,7 @@ CNN = RHSCNN(n_classes=n_classes)
 
 # Train model
 train(CNN)
-
+#%%
 # Load model
 def load_model():
     PATH = "state_dict_model.pt"
