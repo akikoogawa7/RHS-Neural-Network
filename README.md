@@ -1,7 +1,7 @@
 # RHS Plant Classification Model
 Building a multi-classification model using Convolutional Neural Networks (CNNs)
 
-<img src="/imgs/0.jpg" alt="plant" width="400"/>
+<img src="/imgs/1.jpg" alt="plant" width="400"/>
 
 ### Description
 For this deep learning project, I decided to make use of the images which I had collected from an earlier web scraping project, from the [Royal Horticultural Society database](https://www.rhs.org.uk/Plants/Search-Results?form-mode=true&context=l%3Den%26q%3D%2523all%26sl%3DplantForm). 
@@ -22,7 +22,7 @@ The learning rate and number of epochs have been adjusted to attain the highest 
     transforms.ToTensor(),
 ])</code>
 
-<img src="/imgs/before_transformation.jpg" alt="plant" width="300"><img src="/imgs/after_transformation.jpg" alt="plant" width="300">
+<img src="/imgs/before_transformation.jpg" alt="before transform" width="300"><img src="/imgs/after_transformation.jpg" alt="after transform" width="300">
 
 - Split data into training/validation set with ratio of 80/20.
 
