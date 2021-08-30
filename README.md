@@ -14,7 +14,7 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 #### Data Preprocessing
 - Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
 - Converted images to tensor: Images were then transformed into tensors using PIL.
-- Created dataset class: Augmented images
+- Created dataset class: Augmented images <br>
 <code>transforms.Compose([
     transforms.RandomRotation(180),
     transforms.CenterCrop(4),
