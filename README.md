@@ -1,8 +1,7 @@
 # RHS Plant Classification Model
 Building a multi-classification model using Convolutional Neural Networks (CNNs)
 
-<img src="/imgs/1.jpg" alt="plant" width="400"/>
-
+<img src="/imgs/0.jpg" alt="plant" width="400"/>
 
 ### Description
 For this deep learning project, I decided to make use of the images which I had collected from an earlier web scraping project, from the [Royal Horticultural Society database](https://www.rhs.org.uk/Plants/Search-Results?form-mode=true&context=l%3Den%26q%3D%2523all%26sl%3DplantForm). 
@@ -15,17 +14,23 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 #### Data Preprocessing
 - Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
 - Converted images to tensor: Images were then transformed into tensors using PIL.
-- Created dataset class: Transformed the dataset to fit the requirements of the model.<br>
+- Created dataset class: Augmented images
+<br>
 ``transforms.Compose([
     transforms.RandomRotation(180),
     transforms.CenterCrop(4),
     transforms.Resize([64, 64]),
     transforms.ToTensor(),
 ])``
+<img src="/imgs/before_transformation.pdf" alt="plant" width="300"><img src="/imgs/after_transformation.pdf" alt="plant" width="300">
+
+- Split data into training/validation set with ratio of 80/20.
+
 #### Feature Extraction
 - CNN class built using Conv2d, BatchNorm2d, LeakyReLU and Dropout. Fully connected networks built using Linear, LeakyReLU and Softmax. 
-<br>
 #### Regression Analysis
+
+<br>
 - Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
 
 ### Outcome
