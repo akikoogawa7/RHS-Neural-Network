@@ -47,10 +47,10 @@ def train(model, epochs=1000, lr = 0.001):
             # print(f'Accuracy on batch: {acc}')
             writer.add_scalar('loss/train', loss.item(), batch_idx)
             batch_idx += 1
-        for val_features, val_labels in validation_loader:
-            val_output = model(val_features)
-        train_acc = metric(train_output, train_labels)
-        val_acc = metric(val_output, val_labels)
+    for val_features, val_labels in validation_loader:
+        val_output = model(val_features)
+    train_acc = metric(train_output, train_labels)
+    val_acc = metric(val_output, val_labels)
     report(train_acc, val_acc, lr, epoch)
     print(f'Train Accuracy: {train_acc}, Validation Accuracy: {val_acc}')
     # writer.add_scalar('accuracy', acc.item(), batch_idx)
@@ -58,7 +58,7 @@ def train(model, epochs=1000, lr = 0.001):
 
 def report(train_acc, val_acc, lr, epoch):
     with open('report.txt', 'a') as f:
-        f.write(f'ACCURACY SCORE\nTrain accuracy: {train_acc}\nValidation accuracy: {val_acc}\n\nHYPERPARAMETERS\nlr: {lr}\nepochs: {epoch}\n\nTIME\n{time.asctime( time.localtime(time.time()) )}\n\n')
+        f.write(f'\n\nACCURACY SCORE\nTrain accuracy: {train_acc}\nValidation accuracy: {val_acc}\n\nHYPERPARAMETERS\nlr: {lr}\nepochs: {epoch}\n\nTIME\n{time.asctime( time.localtime(time.time()) )}\n\n')
     
 def save_model(epoch, model, optimiser, loss):
     PATH = "state_dict_model.pt"
@@ -73,7 +73,7 @@ def save_model(epoch, model, optimiser, loss):
     )
 
 # Load n classes and img dataset
-n_classes = 80
+n_classes = 50
 dataset = RHSImgDataset(n_classes=n_classes)
 
 # Creating data indices for training and validation splits
@@ -104,7 +104,7 @@ CNN = RHSCNN(n_classes=n_classes)
 
 # Train model
 train(CNN)
-#%%
+
 # Load model
 def load_model():
     PATH = "state_dict_model.pt"

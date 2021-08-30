@@ -36,3 +36,4 @@ Highest accuracy score so far for the training set is 57.4% with `lr = 0.001`, `
 - Decrease learning rate
 - Train with more images / larger dataset
 - Adjust dropout probability
+- Should use GPU framework
