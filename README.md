@@ -15,12 +15,10 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 - Preprocessed image folders: Firstly, the images downloaded were preprocessed in order to label them based on their actual labels.
 - Converted images to tensor: Images were then transformed into tensors using PIL.
 - Created dataset class: Augmented images<br>
-`transforms.Compose([
-    transforms.RandomRotation(180),
-    transforms.CenterCrop(4),
-    transforms.Resize([64, 64]),
-    transforms.ToTensor(),
-])`
+`transforms.RandomRotation(180),
+transforms.CenterCrop(4),
+transforms.Resize([64, 64]),
+transforms.ToTensor()`
 
 <img src="/imgs/before_transform.jpg" alt="before transform" width="300"><img src="/imgs/after_transform.jpg" alt="after transform" width="250">
 
@@ -28,12 +26,14 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 
 #### Feature Extraction
 - CNN class built using Conv2d, BatchNorm2d, LeakyReLU and Dropout. Fully connected networks built using Linear, LeakyReLU and Softmax. 
+- The negative slope for LeakyReLU was set to 0.01.
 #### Regression Analysis
-- Batch runs were logged via tensorboard, to interactively observe which loss curve had the most steepness. 
+- Batch runs were logged via `tensorboard`.
+- Accuracy score was used from `torchmetrics`.
 ### Outcome
 Highest accuracy score so far for the training set is 62.5% with `lr = 0.001`, `epochs = 1000`, `kernal_size = 5`. However validation set accuracy is 21.9% which means the model has overfit the training data too well. This might be due to the small training set which only contains 168 images.
 ### Next Steps
 - Apply more image augmentation
 - Decrease learning rate
 - Train with more images / larger dataset
-- Increase dropout probability from 0.5
+- Adjust dropout probability from 0.5
