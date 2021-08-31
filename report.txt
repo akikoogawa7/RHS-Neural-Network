@@ -20,3 +20,42 @@ epochs: 999
 TIME
 Mon Aug 30 21:58:19 2021
 
+
+
+ACCURACY SCORE
+Train accuracy: 0.6000000238418579
+Validation accuracy: 0.39024388790130615
+
+HYPERPARAMETERS
+lr: 0.0001
+epochs: 999
+
+TIME
+Tue Aug 31 10:41:48 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.800000011920929
+Validation accuracy: 0.5121951103210449
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+dropout: p=0.2
+
+TIME
+Tue Aug 31 10:59:10 2021
+
+ACCURACY SCORE
+Train accuracy: 0.800000011920929
+Validation accuracy: 0.6097561120986938
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+dropout: p=0.1
+
+TIME
+Tue Aug 31 12:17:38 2021
+

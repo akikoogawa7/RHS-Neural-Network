@@ -15,11 +15,11 @@ class RHSCNN(torch.nn.Module):
             torch.nn.MaxPool2d(5),
             torch.nn.BatchNorm2d(32),
             torch.nn.LeakyReLU(negative_slope=negative_slope, inplace=True),
-            torch.nn.Dropout(p=0.2),
+            torch.nn.Dropout(p=0.1),
             torch.nn.Conv2d(32, 64, kernel_size=5),
             torch.nn.MaxPool2d(5),
             torch.nn.LeakyReLU(negative_slope=negative_slope, inplace=True),
-            torch.nn.Dropout(p=0.2),
+            torch.nn.Dropout(p=0.1),
             torch.nn.Flatten(),
 
             torch.nn.Linear(64, 64),
