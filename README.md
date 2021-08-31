@@ -30,10 +30,11 @@ transforms.Resize([64, 64])`
 - Batch runs were logged via `tensorboard`.
 - Accuracy score was used from `torchmetrics`.
 ### Outcome
-Highest accuracy score so far for the training set is 57.4% with `lr = 0.001`, `epochs = 1000`, `kernal_size = 5`. However validation set accuracy is 53.6% which means the model has overfit the training data too well. This might be due to the small training set which only contains 168 images.
+Highest accuracy score so far for the training set is 80% with `lr = 0.001`, `epochs = 1000`, `kernal_size = 5`. However validation set accuracy is 61% which might mean the model could have overfit the training data too well. This might be due to the small training set which only contains 168 images.<br>
+Time taken: 15 minutes
 ### Next Steps
 - Apply more image augmentation
 - Decrease learning rate
 - Train with more images / larger dataset
-- Adjust dropout probability
+- Increase CNN layers
 - Should use GPU framework
