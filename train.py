@@ -16,12 +16,7 @@ def get_train_features_labels():
     for train_features, train_labels in train_loader:
         return train_features, train_labels
 
-def get_val_features_labels():
-    for val_features, val_labels in validation_loader:
-        return val_features, val_labels
-
 train_features, train_labels = get_train_features_labels()
-val_features, val_labels = get_val_features_labels()
 # feature_names = [train_features, val_features]
 
 args = get_flags_passed_in_from_terminal()
