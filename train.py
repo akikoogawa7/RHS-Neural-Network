@@ -22,7 +22,7 @@ def get_val_features_labels():
 
 train_features, train_labels = get_train_features_labels()
 val_features, val_labels = get_val_features_labels()
-feature_names = [train_features, val_features]
+# feature_names = [train_features, val_features]
 
 args = get_flags_passed_in_from_terminal()
 print(args)
@@ -31,11 +31,7 @@ print(args)
 with mlflow.start_run():
 
     # LOG ARTIFACT
-    filename = 'features.txt'
-    with open(filename, 'w') as f:
-        json.dump(list(feature_names))
-    mlflow.log_artifact(filename)
-
+    
     # FIT MODEL
     model = RHSCNN()
     train_output = model(train_features)
