@@ -59,3 +59,29 @@ dropout: p=0.1
 TIME
 Tue Aug 31 12:17:38 2021
 
+
+
+ACCURACY SCORE
+Train accuracy: 0.675000011920929
+Validation accuracy: 0.5365853905677795
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Wed Sep  1 20:19:24 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.6000000238418579
+Validation accuracy: 0.46341463923454285
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Wed Sep  1 21:20:14 2021
+

@@ -12,3 +12,5 @@ data_cleaning_classifier.ipynb
 rhs_plant_database.csv
 view_imgs.py
 /runs
+/mlruns
+conda.yaml
