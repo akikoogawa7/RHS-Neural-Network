@@ -1,0 +1,10 @@
+name: RHS-Neural-Network
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      training_proportion: float
+      regularisation: {type: float, default: 0.01}
+    command: python cnn_model.py -r {regularisation}
