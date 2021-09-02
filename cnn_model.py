@@ -1,10 +1,15 @@
+#%%
 from numpy.lib import index_tricks
 import torch, torchmetrics
 import time
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 from typing import ClassVar
 from imgs_dataset import RHSImgDataset
 from torch.utils.data.sampler import SubsetRandomSampler
+from sklearn.metrics import plot_confusion_matrix
+
 from torch.utils.tensorboard import SummaryWriter
 
 class RHSCNN(torch.nn.Module):
@@ -31,8 +36,14 @@ class RHSCNN(torch.nn.Module):
     def forward(self, x):
         return self.conv_layers(x)
 
+    def predict(self, x):
+        result = self.forward(x)
+        return torch.argmax(result, dim=1)
+
+#%%
 def train(model, epochs=1000, lr = 0.001):
-    writer = SummaryWriter()
+    run_name = f'epochs:{epochs}'
+    writer = SummaryWriter(f'runs/{run_name}')
     metric = torchmetrics.Accuracy()
     criterion = torch.nn.CrossEntropyLoss()
     optimiser = torch.optim.Adam(model.parameters(), lr=lr)
@@ -59,7 +70,7 @@ def train(model, epochs=1000, lr = 0.001):
 def report(train_acc, val_acc, lr, epoch):
     with open('report.txt', 'a') as f:
         f.write(f'\n\nACCURACY SCORE\nTrain accuracy: {train_acc}\nValidation accuracy: {val_acc}\n\nHYPERPARAMETERS\nlr: {lr}\nepochs: {epoch}\n\nTIME\n{time.asctime( time.localtime(time.time()) )}\n\n')
-    
+
 def save_model(epoch, model, optimiser, loss):
     PATH = "state_dict_model.pt"
     torch.save(
@@ -71,6 +82,14 @@ def save_model(epoch, model, optimiser, loss):
         },
         PATH,
     )
+#%%
+def get_train_features_labels():
+    for train_features, train_labels in train_loader:
+        return train_features, train_labels
+
+def get_val_features_labels():
+    for val_features, val_labels in validation_loader:
+        return val_features, val_labels
 
 # Load n classes and img dataset
 n_classes = 50
@@ -101,7 +120,7 @@ dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, n
 
 # Instantiate model
 CNN = RHSCNN(n_classes=n_classes)
-
+#%%
 # Train model
 train(CNN)
 
@@ -110,3 +129,34 @@ def load_model():
     PATH = "state_dict_model.pt"
     CNN.load_state_dict(torch.load(PATH))
     CNN.eval()
+
+#%%
+class_names = pd.read_csv('first_50_labels.csv')
+class_names
+
+#%%
+from sklearn.metrics import plot_confusion_matrix, confusion_matrix, ConfusionMatrixDisplay
+
+train_features, train_labels = get_train_features_labels()
+val_features, val_labels = get_val_features_labels()
+
+model = RHSCNN(n_classes=n_classes)
+y_hat = model.predict(val_features)
+y = val_labels.detach()
+print(y.shape)
+print()
+print(y_hat.shape)
+
+#%%
+predictions = torch.tensor([[1, 1,],[0, 1]])
+labels = predictions
+cm = confusion_matrix(y, y_hat)
+# plot_confusion_matrix(model, y, y_hat)
+plt.show()
+# %%
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+fig, ax = plt.subplots(figsize=(20,20))
+disp.plot(ax=ax)
+plt.show()
+
+# %%
