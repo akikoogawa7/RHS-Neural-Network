@@ -14,3 +14,4 @@ view_imgs.py
 /runs
 /mlruns
 conda.yaml
+sigmoid_model.py
