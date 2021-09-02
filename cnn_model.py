@@ -1,4 +1,3 @@
-#%%
 from numpy.lib import index_tricks
 import torch, torchmetrics
 import time
@@ -8,7 +7,7 @@ import pandas as pd
 from typing import ClassVar
 from imgs_dataset import RHSImgDataset
 from torch.utils.data.sampler import SubsetRandomSampler
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -40,7 +39,6 @@ class RHSCNN(torch.nn.Module):
         result = self.forward(x)
         return torch.argmax(result, dim=1)
 
-#%%
 def train(model, epochs=1000, lr = 0.001):
     run_name = f'epochs:{epochs}'
     writer = SummaryWriter(f'runs/{run_name}')
@@ -133,10 +131,7 @@ def load_model():
 #%%
 class_names = pd.read_csv('first_50_labels.csv')
 class_names
-
 #%%
-from sklearn.metrics import plot_confusion_matrix, confusion_matrix, ConfusionMatrixDisplay
-
 train_features, train_labels = get_train_features_labels()
 val_features, val_labels = get_val_features_labels()
 
@@ -158,5 +153,3 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 fig, ax = plt.subplots(figsize=(20,20))
 disp.plot(ax=ax)
 plt.show()
-
-# %%
