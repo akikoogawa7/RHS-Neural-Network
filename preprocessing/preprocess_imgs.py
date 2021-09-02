@@ -31,7 +31,12 @@ def get_url_label(url):
 
 # Create new column with labels
 df['Labels'] = df.apply(lambda row: get_url_label(row[0]), axis=1)
-df
+
+def get_first_50_labels():
+    first_50_labels = df['Labels'][0:51]
+    first_50_labels.to_csv('first_50_labels.csv')
+
+get_first_50_labels()
 
 # Rename indexed folders with labels
 img_path = os.getcwd() + '/plant_imgs'
