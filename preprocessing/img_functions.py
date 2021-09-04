@@ -1,5 +1,6 @@
 #%%
 import os
+from numpy import concatenate
 import pandas as pd
 from pandas import DataFrame
 from PIL import Image
@@ -32,9 +33,7 @@ def create_file_list(my_dir, format='.jpg', n_classes=50):
 
 #%%
 file_list = create_file_list('dataset/plant_imgs', n_classes=50)
-#%%
-#%%
-file_list
+
 #%%
 extract_species_list = []
 
@@ -49,26 +48,17 @@ for file in file_list:
     
 extract_species_list
 
-#%%
-
 extracted_species_df = DataFrame(extract_species_list, columns=['Species'])
 species_link_df = DataFrame(file_list, columns=['Path'])
 
-# extracted species dataframe
-extracted_species_df
-
-# species img path dataframe
-species_link_df
-
 extracted_species_df = extracted_species_df.drop_duplicates(subset='Species', keep='first')
-#%%
-extracted_species_df.to_csv('first_52_plants.csv')
 
-#%%
+extracted_species_df.to_csv('first_50_plants.csv')
+
 combined_df = [extracted_species_df, species_link_df]
-concatenated_dfs = pd.concat(combined_df, axis=1)
-concatenated_dfs
 
+concatenated_dfs = pd.concat(combined_df, join='inner', axis=1)
+concatenated_dfs
 #%%
 if __name__ == '__main__':
     file_list = create_file_list('plant_imgs', n_classes=50)
