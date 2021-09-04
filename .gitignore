@@ -4,10 +4,7 @@ __pycache__
 questions.txt
 .DS_Store
 extracted_links.csv
-2. Convolutional Solutions.ipynb
-2. Datasets & DataLoaders.ipynb
-4. Metrics & Training Loop Solutions.ipynb
-/plant_imgs
+dataset/plant_imgs
 data_cleaning_classifier.ipynb
 rhs_plant_database.csv
 view_imgs.py
