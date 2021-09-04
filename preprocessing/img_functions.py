@@ -33,7 +33,6 @@ def create_file_list(my_dir, format='.jpg', n_classes=50):
 #%%
 file_list = create_file_list('dataset/plant_imgs', n_classes=50)
 #%%
-import pandas as pd
 #%%
 file_list
 #%%
@@ -51,8 +50,6 @@ for file in file_list:
 extract_species_list
 
 #%%
-import pandas as pd
-from pandas import DataFrame
 
 extracted_species_df = DataFrame(extract_species_list, columns=['Species'])
 species_link_df = DataFrame(file_list, columns=['Path'])
