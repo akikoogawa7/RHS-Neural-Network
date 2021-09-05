@@ -14,3 +14,4 @@ conda.yaml
 sigmoid_model.py
 .vscode
 preprocessing/google_imgs_scraped
+/all_plant_imgs
