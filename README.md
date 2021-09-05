@@ -39,4 +39,5 @@ Time taken: 15 minutes
 - Apply more image augmentation
 - Increase CNN layers
 - Should use GPU framework
-- Train with more images / larger dataset for each class. Could use web scraper to collect more images of the same plants
+- Train with more images / larger dataset for each class
+- Going to use selenium web scraper to collect more images of the same plants for training/validation.
