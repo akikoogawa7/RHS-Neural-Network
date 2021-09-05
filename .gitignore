@@ -13,3 +13,4 @@ view_imgs.py
 conda.yaml
 sigmoid_model.py
 .vscode
+preprocessing/google_imgs_scraped
