@@ -37,7 +37,6 @@ Highest accuracy score so far for the training set is 80% with `lr = 0.001`, `ep
 Time taken: 15 minutes
 ### Next Steps
 - Apply more image augmentation
-- Decrease learning rate
-- Train with more images / larger dataset
 - Increase CNN layers
 - Should use GPU framework
+- Train with more images / larger dataset for each class. Could use web scraper to collect more images of the same plants
