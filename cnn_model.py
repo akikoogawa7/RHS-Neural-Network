@@ -92,17 +92,15 @@ def get_val_features_labels():
         return val_features, val_labels
 #%%
 # Load n classes and img dataset
-n_classes = 50
+n_classes = 61
 dataset = RHSImgDataset(n_classes=n_classes)
 
-for X, y in dataset:
-    print(X, y)
 #%%
 # Creating data indices for training and validation splits
-num_workers = 2
+num_workers = 0
 validation_split = .2
 shuffle_dataset = True
-random_seed= 42
+random_seed = 42
 
 dataset_size = len(dataset)
 indices = list(range(dataset_size))

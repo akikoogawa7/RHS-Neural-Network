@@ -22,14 +22,14 @@ default_transform = transforms.Compose([
 ])
 
 class RHSImgDataset(torch.utils.data.Dataset):
-        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=50):
+        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=39):
             super().__init__
 
             # Load in plant_imgs folder as list 
             # self.my_file_list = create_file_list('dataset/plant_imgs', n_classes=n_classes)
 
             # Load in df with img paths
-            img_paths_df = pd.read_csv('first_50_idx_plant_paths.csv')
+            img_paths_df = pd.read_csv('first_80_idx_plant_paths.csv')
             self.img_paths_list = create_img_paths_list_from_df(img_paths_df)
 
             # Transform imgs to tensor
