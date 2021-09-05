@@ -12,3 +12,4 @@ view_imgs.py
 /mlruns
 conda.yaml
 sigmoid_model.py
+.vscode

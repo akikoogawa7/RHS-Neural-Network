@@ -18,8 +18,6 @@ def create_label_list_from_df(df):
 
 labels_df = pd.read_csv('first_80_idx_plant_labels.csv', header=None)
 label_list = create_label_list_from_df(labels_df)
-label_list
-#%%
 
 # Create folders of google imgs
 root = os.getcwd()
@@ -29,8 +27,6 @@ os.makedirs(folder_path)
 for label in label_list:
     path = os.path.join(folder_path, label)
     os.makedirs(path)
-
-#%%
 
 def open_and_scrape_google_imgs(label):
     PATH = 'https://www.google.com/imghp?hl=en'
@@ -61,8 +57,8 @@ def open_and_scrape_google_imgs(label):
 
     # Find image and click
     img = driver.find_element_by_class_name('c7cjWc')
-    ActionChains(driver).move_to_element(img).click(img).perform()
-    driver.implicitly_wait(10)
+    # ActionChains(driver).move_to_element(img).click(img).perform()
+    # driver.implicitly_wait(10)
 
     # Will keep scrolling down the webpage until it cannot scroll anymore
     last_height = driver.execute_script('return document.body.scrollHeight')
@@ -85,9 +81,8 @@ def open_and_scrape_google_imgs(label):
             driver.find_element_by_xpath('//*[@id="islrg"]/div[1]/div['+str(i)+']/a[1]/div[1]/img').screenshot(f'google_imgs_scraped/{label}/{label}('+str(i)+').png')
         except:
             pass
+
+    driver.close()
         
 for label in label_list:
     open_and_scrape_google_imgs(label)
-# %%
-
-# %%
