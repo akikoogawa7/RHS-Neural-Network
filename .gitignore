@@ -15,3 +15,6 @@ sigmoid_model.py
 .vscode
 dataset_preprocessing/all_plant_imgs
 questions.txt
+first_80_idx_plant_labels.csv
+first_80_idx_plant_paths.csv
+combined_plant_labels_and_path.csv
