@@ -54,7 +54,7 @@ def df_to_csv_no_header(df, csv_filename):
     df.to_csv(f'{csv_filename}.csv', header=False, index=False)
 
 # Create python-readable file list from plant_imgs folder
-file_list = create_file_list('plant_imgs', n_classes=80)
+file_list = create_file_list('all_plant_imgs', n_classes=80)
 file_list
 
 # Get each 'Species' label from file path
@@ -67,6 +67,9 @@ for file in file_list:
 # Drop duplicates from 'Species' column ready for inner join with 'Path' column
 extracted_species_df = DataFrame(extract_species_list, columns=['Species']).drop_duplicates(subset='Species', keep='first')
 species_img_path_df = DataFrame(file_list, columns=['Path'])
+
+# Sort to alphabetical order
+extracted_species_df = extracted_species_df.sort_values('Species')
 
 # Save extracted species label df with dropped duplicates to csv
 df_to_csv_no_header(extracted_species_df, 'first_80_idx_plant_labels')
