@@ -12,7 +12,7 @@ view_imgs.py
 /mlruns
 conda.yaml
 sigmoid_model.py
-.vscode
+.vscode/settings.json
 dataset_preprocessing/all_plant_imgs
 questions.txt
 first_80_idx_plant_labels.csv
