@@ -1,3 +1,4 @@
+#%%
 from numpy.lib import index_tricks
 import torch, torchmetrics
 import time
@@ -5,12 +6,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from typing import ClassVar
-from imgs_dataset import RHSImgDataset
+from preprocessing.imgs_dataset import RHSImgDataset
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 from torch.utils.tensorboard import SummaryWriter
-
+#%%
 class RHSCNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3, negative_slope=0.01):
         super().__init__()
@@ -88,13 +89,13 @@ def get_train_features_labels():
 def get_val_features_labels():
     for val_features, val_labels in validation_loader:
         return val_features, val_labels
-
+#%%
 # Load n classes and img dataset
 n_classes = 50
 dataset = RHSImgDataset(n_classes=n_classes)
 
 # Creating data indices for training and validation splits
-num_workers = 0
+num_workers = 2
 validation_split = .2
 shuffle_dataset = True
 random_seed= 42
@@ -114,7 +115,7 @@ valid_sampler = SubsetRandomSampler(val_indices)
 # Create loader
 train_loader = torch.utils.data.DataLoader(dataset, batch_size=64, num_workers=num_workers, sampler=train_sampler)
 validation_loader = torch.utils.data.DataLoader(dataset, batch_size=64, num_workers=num_workers, sampler=valid_sampler)
-dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=0)
+dataloader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, num_workers=num_workers)
 
 # Instantiate model
 CNN = RHSCNN(n_classes=n_classes)

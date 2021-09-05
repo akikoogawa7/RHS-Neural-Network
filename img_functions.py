@@ -63,22 +63,22 @@ for file in file_list:
 extracted_species_df = DataFrame(extract_species_list, columns=['Species']).drop_duplicates(subset='Species', keep='first')
 species_img_path_df = DataFrame(file_list, columns=['Path'])
 
-# Save dfs to csv
-df_to_csv(extracted_species_df, 'first_50_plants')
-df_to_csv(species_img_path_df, 'first_50_img_paths')
+# Save extracted species label df with dropped duplicates to csv
+df_to_csv(extracted_species_df, 'first_50_idx_plant_labels')
 
 # Define combination of dfs to concatenate
 combined_df = [extracted_species_df, species_img_path_df]
 
 # Concatenate dfs using inner join to drop duplicate values in 'Species' and in 'Path'
 concatenated_dfs = pd.concat(combined_df, join='inner', axis=1)
-df_to_csv(concatenated_dfs)
+df_to_csv(concatenated_dfs, 'combined_plant_labels_and_path')
 
 # Create img paths list from concatenated df
 img_path_file_list = create_img_paths_list_from_df(concatenated_dfs)
 
 # Drop column from the concatenated df to only keep paths
 paths_df = concatenated_dfs.drop(columns='Species', axis=1)
+df_to_csv(paths_df, 'first_50_idx_plant_paths')
 
 # 'Paths' column with img paths now no longer have duplicates 
 
