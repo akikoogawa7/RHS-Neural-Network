@@ -1,3 +1,4 @@
+#%%
 import torch
 import torchvision
 import pandas as pd
@@ -11,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from img_functions import create_img_paths_list_from_df
 
 name_to_index = {
-    name: idx for idx, name in enumerate(os.listdir('all_plant_imgs'))
+    name: idx for idx, name in enumerate(os.listdir('dataset_preprocessing/google_imgs_scraped'))
 }
 
 default_transform = transforms.Compose([
@@ -51,7 +52,7 @@ class RHSImgDataset(torch.utils.data.Dataset):
             
         def __len__(self):
             return len(self.img_paths_list)
-
+#%%
 if __name__ == '__main__':
     dataset = RHSImgDataset()
     dataset[0]
