@@ -133,7 +133,7 @@ def load_model():
     CNN.eval()
 
 #%%
-class_names = pd.read_csv('first_50_idx_plant_labels.csv')
+class_names = pd.read_csv('first_80_idx_plant_labels.csv')
 class_names
 #%%
 train_features, train_labels = get_train_features_labels()

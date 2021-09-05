@@ -36,7 +36,7 @@ def create_file_list(my_dir, format='.jpg', n_classes=80):
 # Function to append img path strings in df column - 'Path' to a list
 def create_img_paths_list_from_df(df):
     img_path_list = []
-    for img_path in df['Path']: img_path_list.append(img_path)
+    for img_path in df: img_path_list.append(img_path)
     return img_path_list
 
 # Function to split the string to get 'Species' label
@@ -48,6 +48,10 @@ def extract_species(img_path):
 # Function to convert df to csv files
 def df_to_csv(df, csv_filename):
     df.to_csv(f'{csv_filename}.csv')
+
+# Function to convert df to csv with no column header
+def df_to_csv_no_header(df, csv_filename):
+    df.to_csv(f'{csv_filename}.csv', header=False, index=False)
 
 # Create python-readable file list from plant_imgs folder
 file_list = create_file_list('plant_imgs', n_classes=80)
@@ -65,7 +69,7 @@ extracted_species_df = DataFrame(extract_species_list, columns=['Species']).drop
 species_img_path_df = DataFrame(file_list, columns=['Path'])
 
 # Save extracted species label df with dropped duplicates to csv
-df_to_csv(extracted_species_df, 'first_80_idx_plant_labels')
+df_to_csv_no_header(extracted_species_df, 'first_80_idx_plant_labels')
 
 # Define combination of dfs to concatenate
 combined_df = [extracted_species_df, species_img_path_df]
@@ -79,7 +83,7 @@ img_path_file_list = create_img_paths_list_from_df(concatenated_dfs)
 
 # Drop column from the concatenated df to only keep paths
 paths_df = concatenated_dfs.drop(columns='Species', axis=1)
-df_to_csv(paths_df, 'first_80_idx_plant_paths')
+df_to_csv_no_header(paths_df, 'first_80_idx_plant_paths')
 
 # 'Paths' column with img paths now no longer have duplicates 
 

@@ -22,7 +22,7 @@ default_transform = transforms.Compose([
 ])
 
 class RHSImgDataset(torch.utils.data.Dataset):
-        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=39):
+        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=61):
             super().__init__
 
             # Load in plant_imgs folder as list 
@@ -41,6 +41,7 @@ class RHSImgDataset(torch.utils.data.Dataset):
             species = img_path.split('/')
             species = species[-2]
             idx = name_to_index[species]
+
             img = Image.open(img_path)
 
             # Apply tensor transformation to img
@@ -48,7 +49,6 @@ class RHSImgDataset(torch.utils.data.Dataset):
                 img = self.transform(img)
             return img, idx
             
-
         def __len__(self):
             return len(self.img_paths_list)
 

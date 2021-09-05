@@ -14,7 +14,7 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 #### Data Preprocessing
 Files can be found in the 'preprocessing' folder.
 - <b>Made human readable</b>: The images downloaded have been preprocessed from numerical indexes into human-readable format. Images are now labelled as their species name in the 'plant_imgs' folder.
-- <b>Selected categories for classifier: First 50 plants starting with first letter in alphabetical order were selected for the CNN classifier.
+- <b>Selected categories for classifier:</b> First 80 plants were indexed out starting with first letter in alphabetical order were selected for the CNN classifier.
 - <b>Removed duplicates:</b> There were many duplicate images in each species folder, so used a <i>difference hashing</i> `dhash` function to convert img content into unique hashes to match identical images in order to remove them.
 - Using the torch dataloader and dataset class, the images were then converted to tensors using PIL.
 - Created dataset class: Augmented images<br>
