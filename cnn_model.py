@@ -6,11 +6,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from typing import ClassVar
-from preprocessing.imgs_dataset import RHSImgDataset
+from imgs_dataset import RHSImgDataset
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 from torch.utils.tensorboard import SummaryWriter
+
 #%%
 class RHSCNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3, negative_slope=0.01):
@@ -94,6 +95,9 @@ def get_val_features_labels():
 n_classes = 50
 dataset = RHSImgDataset(n_classes=n_classes)
 
+for X, y in dataset:
+    print(X, y)
+#%%
 # Creating data indices for training and validation splits
 num_workers = 2
 validation_split = .2
@@ -123,6 +127,7 @@ CNN = RHSCNN(n_classes=n_classes)
 # Train model
 train(CNN)
 
+#%%
 # Load model
 def load_model():
     PATH = "state_dict_model.pt"
@@ -130,7 +135,7 @@ def load_model():
     CNN.eval()
 
 #%%
-class_names = pd.read_csv('first_50_labels.csv')
+class_names = pd.read_csv('first_50_idx_plant_labels.csv')
 class_names
 #%%
 train_features, train_labels = get_train_features_labels()
@@ -154,3 +159,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 fig, ax = plt.subplots(figsize=(20,20))
 disp.plot(ax=ax)
 plt.show()
+
+#%%
+dataset[0]
+# %%
