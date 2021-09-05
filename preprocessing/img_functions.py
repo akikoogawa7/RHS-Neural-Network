@@ -1,4 +1,3 @@
-#%%
 import os
 from numpy import concatenate
 import pandas as pd
@@ -6,7 +5,9 @@ from pandas import DataFrame
 from PIL import Image
 from string import ascii_lowercase, ascii_uppercase
 
-# Define file list function
+# Define file list functions for image folder processing into computer readables list of files
+
+# Function to order files in alphabetical order
 def first_letter_alphabetical_order(name):
     for letter in ascii_uppercase:
         if name.startswith(letter):
@@ -14,6 +15,7 @@ def first_letter_alphabetical_order(name):
         else:
             pass
 
+# Function to create file list from plant_imgs folder
 def create_file_list(my_dir, format='.jpg', n_classes=50):
     file_list = []
     for idx, (root, dirs, files) in enumerate(os.walk(my_dir, topdown=False)):
@@ -31,36 +33,55 @@ def create_file_list(my_dir, format='.jpg', n_classes=50):
                 file_list.append(full_name)
     return file_list
 
-#%%
-file_list = create_file_list('dataset/plant_imgs', n_classes=50)
+# Function to append img path strings in df column - 'Path' to a list
+def create_img_paths_list_from_df(df):
+    img_path_list = []
+    for img_path in df['Path']: img_path_list.append(img_path)
+    return img_path_list
 
-#%%
-extract_species_list = []
-
+# Function to split the string to get 'Species' label
 def extract_species(img_path):
     species = img_path.split('/')
     species = species[-2]
     return species
 
+# Function to convert df to csv files
+def df_to_csv(df, csv_filename):
+    df.to_csv(f'{csv_filename}.csv')
+
+# Create python-readable file list from plant_imgs folder
+file_list = create_file_list('dataset/plant_imgs', n_classes=50)
+
+# Get each 'Species' label from file path
+extract_species_list = []
 for file in file_list:
     extracted_species = extract_species(file)
     extract_species_list.append(extracted_species)
-    
-extract_species_list
 
-extracted_species_df = DataFrame(extract_species_list, columns=['Species'])
-species_link_df = DataFrame(file_list, columns=['Path'])
+# Turn each list into df columns
+# Drop duplicates from 'Species' column ready for inner join with 'Path' column
+extracted_species_df = DataFrame(extract_species_list, columns=['Species']).drop_duplicates(subset='Species', keep='first')
+species_img_path_df = DataFrame(file_list, columns=['Path'])
 
-extracted_species_df = extracted_species_df.drop_duplicates(subset='Species', keep='first')
+# Save dfs to csv
+df_to_csv(extracted_species_df, 'first_50_plants')
+df_to_csv(species_img_path_df, 'first_50_img_paths')
 
-extracted_species_df.to_csv('first_50_plants.csv')
+# Define combination of dfs to concatenate
+combined_df = [extracted_species_df, species_img_path_df]
 
-combined_df = [extracted_species_df, species_link_df]
-
+# Concatenate dfs using inner join to drop duplicate values in 'Species' and in 'Path'
 concatenated_dfs = pd.concat(combined_df, join='inner', axis=1)
-concatenated_dfs
-#%%
+df_to_csv(concatenated_dfs)
+
+# Create img paths list from concatenated df
+img_path_file_list = create_img_paths_list_from_df(concatenated_dfs)
+
+# Drop column from the concatenated df to only keep paths
+paths_df = concatenated_dfs.drop(columns='Species', axis=1)
+
+# 'Paths' column with img paths now no longer have duplicates 
+
 if __name__ == '__main__':
     file_list = create_file_list('plant_imgs', n_classes=50)
-    print(len(file_list))   
-# %%
+    print(len(file_list))
