@@ -50,7 +50,8 @@ def df_to_csv(df, csv_filename):
     df.to_csv(f'{csv_filename}.csv')
 
 # Create python-readable file list from plant_imgs folder
-file_list = create_file_list('dataset/plant_imgs', n_classes=50)
+file_list = create_file_list('plant_imgs', n_classes=50)
+file_list
 
 # Get each 'Species' label from file path
 extract_species_list = []

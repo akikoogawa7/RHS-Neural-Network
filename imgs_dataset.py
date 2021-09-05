@@ -1,4 +1,3 @@
-#%%
 import torch
 import torchvision
 import pandas as pd
@@ -62,7 +61,3 @@ if __name__ == '__main__':
         print(f'The size of X: {X.shape}, the size of y: {y.shape}')
         print(f'The dimension of X: {X.ndim}, the dimension of y: {y.ndim}')
         break
-
-# %%
-
-# %%
