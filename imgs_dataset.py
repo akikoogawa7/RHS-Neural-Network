@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from img_functions import create_img_paths_list_from_df
 
 name_to_index = {
-    name: idx for idx, name in enumerate(os.listdir('plant_imgs'))
+    name: idx for idx, name in enumerate(os.listdir('all_plant_imgs'))
 }
 
 default_transform = transforms.Compose([
