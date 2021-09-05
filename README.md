@@ -6,7 +6,7 @@ Building a multi-classification model using Convolutional Neural Networks (CNNs)
 ### Description
 For this deep learning project, I decided to make use of the images which I had collected from an earlier web scraping project, from the [Royal Horticultural Society database](https://www.rhs.org.uk/Plants/Search-Results?form-mode=true&context=l%3Den%26q%3D%2523all%26sl%3DplantForm). 
 <br><br>
-This CNN model and MVP (Minimum Viable Product) hopes to accurately classify the 3147 different types of plants. However, because of the large amount of possible plant images to be potentially classified, the default number of classes has been set to `n_classes = 50`.<br>
+This CNN model and MVP (Minimum Viable Product) hopes to accurately classify the 3147 different types of plants. However, because of the large amount of possible plant images to be potentially classified, the default number of classes has been finally set to `n_classes = 61` after initially indexing the first 80. Deleting duplicate images and file paths have left us with 61 different plant images to train.<br>
 The number of images have been batched to a length of 64 per batch and are shuffled.<br>
 The learning rate and number of epochs have been adjusted to attain the highest accuracy score. Gradient descent optimiser Adam (Adaptive Moment Estimation) has been used throughout training.
 
@@ -15,7 +15,7 @@ The learning rate and number of epochs have been adjusted to attain the highest 
 Files can be found in the 'preprocessing' folder.
 - <b>Made human readable</b>: The images downloaded have been preprocessed from numerical indexes into human-readable format. Images are now labelled as their species name in the 'plant_imgs' folder.
 - <b>Selected categories for classifier:</b> First 80 plants were indexed out starting with first letter in alphabetical order were selected for the CNN classifier.
-- <b>Removed duplicates:</b> There were many duplicate images in each species folder, so used a <i>difference hashing</i> `dhash` function to convert img content into unique hashes to match identical images in order to remove them.
+- <b>Removed duplicates:</b> There were many duplicate images in each species folder, so used a <i>difference hashing</i> `dhash` algorithm to convert img content into unique hashes in order to match and remove them.
 - Using the torch dataloader and dataset class, the images were then converted to tensors using PIL.
 - Created dataset class: Augmented images<br>
 `transforms.RandomRotation(180),
