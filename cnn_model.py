@@ -12,7 +12,6 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 from torch.utils.tensorboard import SummaryWriter
 
-#%%
 class RHSCNN(torch.nn.Module):
     def __init__(self, n_classes, in_channels=3, negative_slope=0.01):
         super().__init__()
@@ -60,11 +59,11 @@ def train(model, epochs=1000, lr = 0.001):
             batch_idx += 1
     for val_features, val_labels in validation_loader:
         val_output = model(val_features)
-    train_acc = metric(train_output, train_labels)
-    val_acc = metric(val_output, val_labels)
-    report(train_acc, val_acc, lr, epoch)
-    print(f'Train Accuracy: {train_acc}, Validation Accuracy: {val_acc}')
-    # writer.add_scalar('accuracy', acc.item(), batch_idx)
+        train_acc = metric(train_output, train_labels)
+        val_acc = metric(val_output, val_labels)
+        report(train_acc, val_acc, lr, epoch)
+        print(f'Train Accuracy: {train_acc}, Validation Accuracy: {val_acc}')
+        # writer.add_scalar('accuracy', acc.item(), batch_idx)
     save_model(epoch, model, optimiser, loss)
 
 def report(train_acc, val_acc, lr, epoch):
@@ -92,7 +91,7 @@ def get_val_features_labels():
         return val_features, val_labels
 #%%
 # Load n classes and img dataset
-n_classes = 61
+n_classes = 50
 dataset = RHSImgDataset(n_classes=n_classes)
 
 #%%
@@ -133,7 +132,7 @@ def load_model():
     CNN.eval()
 
 #%%
-class_names = pd.read_csv('first_80_idx_plant_labels.csv')
+class_names = pd.read_csv('first_50_labels.csv')
 class_names
 #%%
 train_features, train_labels = get_train_features_labels()
@@ -148,9 +147,8 @@ print(y_hat.shape)
 
 #%%
 predictions = torch.tensor([[1, 1,],[0, 1]])
-labels = predictions
+labels = class_names
 cm = confusion_matrix(y, y_hat)
-# plot_confusion_matrix(model, y, y_hat)
 plt.show()
 # %%
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
@@ -158,6 +156,4 @@ fig, ax = plt.subplots(figsize=(20,20))
 disp.plot(ax=ax)
 plt.show()
 
-#%%
-dataset[0]
 # %%

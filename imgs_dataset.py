@@ -9,10 +9,10 @@ from PIL import Image
 from pathlib import Path
 from torchvision import transforms
 from sklearn.model_selection import train_test_split
-from img_functions import create_img_paths_list_from_df
+from img_functions import create_img_paths_list_from_df, create_file_list
 
 name_to_index = {
-    name: idx for idx, name in enumerate(os.listdir('dataset_preprocessing/google_imgs_scraped'))
+    name: idx for idx, name in enumerate(os.listdir('dataset_preprocessing/all_plant_imgs'))
 }
 
 default_transform = transforms.Compose([
@@ -23,15 +23,15 @@ default_transform = transforms.Compose([
 ])
 
 class RHSImgDataset(torch.utils.data.Dataset):
-        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=61):
+        def __init__ (self, transform=default_transform, target='Full Sun', n_classes=50):
             super().__init__
 
             # Load in plant_imgs folder as list 
-            # self.my_file_list = create_file_list('dataset/plant_imgs', n_classes=n_classes)
+            self.img_paths_list = create_file_list('dataset_preprocessing/all_plant_imgs', n_classes=n_classes)
 
             # Load in df with img paths
-            img_paths_df = pd.read_csv('first_80_idx_plant_paths.csv')
-            self.img_paths_list = create_img_paths_list_from_df(img_paths_df)
+            # img_paths_df = pd.read_csv('first_80_idx_plant_paths.csv')
+            # self.img_paths_list = create_img_paths_list_from_df(img_paths_df)
 
             # Transform imgs to tensor
             self.transform = transform
@@ -62,3 +62,4 @@ if __name__ == '__main__':
         print(f'The size of X: {X.shape}, the size of y: {y.shape}')
         print(f'The dimension of X: {X.ndim}, the dimension of y: {y.ndim}')
         break
+# %%

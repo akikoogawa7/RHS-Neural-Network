@@ -34,7 +34,7 @@ df['Labels'] = df.apply(lambda row: get_url_label(row[0]), axis=1)
 
 def get_first_50_labels():
     first_50_labels = df['Labels'][0:51]
-    first_50_labels.to_csv('first_50_labels.csv')
+    first_50_labels.to_csv('first_50_labels.csv', header=None, index=None)
 
 get_first_50_labels()
 
