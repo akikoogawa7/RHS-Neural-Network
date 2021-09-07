@@ -16,12 +16,11 @@ def first_letter_alphabetical_order(name):
             pass
 
 # Function to create file list from plant_imgs folder
-def create_file_list(my_dir, format='.jpg', n_classes=80):
+# For RHS imgs
+def create_file_list(my_dir, format='.jpg'):
     file_list = []
-    for idx, (root, dirs, files) in enumerate(os.walk(my_dir, topdown=False)):
-        if idx == n_classes:
-            break
-        
+    for root, (dirs, files) in enumerate(os.walk(my_dir, topdown=False)):
+
         for name in files:
             first_letter_alphabetical_order(name)
             if name.endswith(format):
@@ -30,6 +29,16 @@ def create_file_list(my_dir, format='.jpg', n_classes=80):
                     Image.open(full_name)
                 except:
                     continue
+                file_list.append(full_name)
+    return file_list
+
+# For Google imgs
+def create_file_list_google_imgs(my_dir, format='.png'):
+    file_list = []
+    for root, dirs, files in os.walk(my_dir, topdown=False):      
+        for name in files:
+            if name.endswith(format):
+                full_name = os.path.join(root, name)
                 file_list.append(full_name)
     return file_list
 
