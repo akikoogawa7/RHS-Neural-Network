@@ -124,3 +124,16 @@ epochs: 999
 TIME
 Mon Sep  6 10:40:46 2021
 
+
+
+ACCURACY SCORE
+Train accuracy: 0.5952380895614624
+Validation accuracy: 0.0
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Tue Sep  7 10:43:07 2021
+

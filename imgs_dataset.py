@@ -9,10 +9,10 @@ from PIL import Image
 from pathlib import Path
 from torchvision import transforms
 from sklearn.model_selection import train_test_split
-from img_functions import create_img_paths_list_from_df, create_file_list
+from img_functions import create_file_list_google_imgs
 
 name_to_index = {
-    name: idx for idx, name in enumerate(os.listdir('dataset_preprocessing/all_plant_imgs'))
+    name: idx for idx, name in enumerate(os.listdir('dataset_preprocessing/google_imgs_scraped'))
 }
 
 default_transform = transforms.Compose([
@@ -27,7 +27,7 @@ class RHSImgDataset(torch.utils.data.Dataset):
             super().__init__
 
             # Load in plant_imgs folder as list 
-            self.img_paths_list = create_file_list('dataset_preprocessing/all_plant_imgs', n_classes=n_classes)
+            self.img_paths_list = create_file_list_google_imgs('dataset_preprocessing/google_imgs_scraped')
 
             # Load in df with img paths
             # img_paths_df = pd.read_csv('first_80_idx_plant_paths.csv')
