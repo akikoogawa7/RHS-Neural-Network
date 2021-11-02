@@ -1,0 +1,7 @@
+torch
+torch.metrics
+tensorboard
+PIL
+os
+urllib.parse
+pandas

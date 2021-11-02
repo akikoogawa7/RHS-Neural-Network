@@ -1,0 +1,139 @@
+ACCURACY SCORE
+Train accuracy: 0.574999988079071
+Validation accuracy: 0.5365853905677795
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Mon Aug 30 19:35:22 2021
+
+ACCURACY SCORE
+Train accuracy: 0.7250000238418579
+Validation accuracy: 0.5853658318519592
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Mon Aug 30 21:58:19 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.6000000238418579
+Validation accuracy: 0.39024388790130615
+
+HYPERPARAMETERS
+lr: 0.0001
+epochs: 999
+
+TIME
+Tue Aug 31 10:41:48 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.800000011920929
+Validation accuracy: 0.5121951103210449
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+dropout: p=0.2
+
+TIME
+Tue Aug 31 10:59:10 2021
+
+ACCURACY SCORE
+Train accuracy: 0.800000011920929
+Validation accuracy: 0.6097561120986938
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+dropout: p=0.1
+
+TIME
+Tue Aug 31 12:17:38 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.675000011920929
+Validation accuracy: 0.5365853905677795
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Wed Sep  1 20:19:24 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.6000000238418579
+Validation accuracy: 0.46341463923454285
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Wed Sep  1 21:20:14 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.75
+Validation accuracy: 0.0
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Sun Sep  5 11:14:36 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.4761904776096344
+Validation accuracy: 0.10000000149011612
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Mon Sep  6 09:35:33 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.6666666865348816
+Validation accuracy: 0.10000000149011612
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Mon Sep  6 10:40:46 2021
+
+
+
+ACCURACY SCORE
+Train accuracy: 0.5952380895614624
+Validation accuracy: 0.0
+
+HYPERPARAMETERS
+lr: 0.001
+epochs: 999
+
+TIME
+Tue Sep  7 10:43:07 2021
+
